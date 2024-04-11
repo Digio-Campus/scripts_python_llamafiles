@@ -1,0 +1,4 @@
+Response
+"Instruct: You must return just a message with the main info from the prompt and this format: ""word,
+         word,word
+word,word,word. The prompt is: Nombre: Juan, Apellidos: Valera Reales, Edad: 29, Nombre: Sara, Apellidos: Marín Sánchez, Edad: 30"" Output:"
