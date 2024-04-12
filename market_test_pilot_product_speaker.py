@@ -1,7 +1,7 @@
 from openai import OpenAI
 import mysql.connector
 
-model = "Rocket-3B"
+model = "Phi-temp 0"
 
 
 def get_review_messages(content, registro):
@@ -30,16 +30,16 @@ def get_insert_query_general_results(field):
 
 
 def process_review(field, client, messages, cursor, conexion, registro):
-    completion = client.chat.completions.create(model="LLaMA_CPP", messages=messages, temperature=0.8, max_tokens=100)
-    response = completion.choices[0].message.content
+    completion = client.chat.completions.create(model="LLaMA_CPP", messages=messages, temperature=0.0, max_tokens=100)
+    response = "\n" + completion.choices[0].message.content
     cursor.execute(get_insert_query_speaker_product_reviews(field), (registro[0], response))
     conexion.commit()
     return response
 
 
 def process_global_review(field, client, messages, cursor, conexion, registro):
-    completion = client.chat.completions.create(model="LLaMA_CPP", messages=messages, temperature=0.8, max_tokens=100)
-    response = completion.choices[0].message.content
+    completion = client.chat.completions.create(model="LLaMA_CPP", messages=messages, temperature=0.0, max_tokens=100)
+    response = "\n" + completion.choices[0].message.content
     cursor.execute(get_insert_query_general_results(field), (model, response))
     conexion.commit()
     print("\nGlobal design response field: ", field, response)
